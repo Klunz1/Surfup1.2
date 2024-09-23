@@ -1,0 +1,60 @@
+﻿@model Order
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Kurvvisning -->
+        <div class="col-lg-8">
+            <!-- Visning af totalprisen -->
+            <h1 class="mb-4">Total pris: @Model.TotalPrice kr.</h1>
+
+
+            <!-- Check for at se om der er surfboards i kurven -->
+            @if (Model.Surfboards != null && Model.Surfboards.Any())
+            {
+                <!-- Bruger Bootstrap's kortkomponenter og grid-system -->
+                <div class="row">
+                    @foreach (var surfboard in Model.Surfboards)
+                    {
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                <!-- Surfboard billede -->
+                                <img src="https://cdn.openart.ai/published/3qZkBGM8J9tqVqG8aHx7/g4V5D2mU_FsEB_256.webp" class="card-img-top" alt="Surfboard image" style="height: 200px; object-fit: cover;" />
+
+                                <!-- Surfboard information -->
+                                <div class="card-body">
+                                    <h5 class="card-title">@surfboard.Name</h5>
+                                    <p class="card-text"><strong>Pris:</strong> @surfboard.PriceOfPurchase kr.</p>
+                                    <p class="card-text"><strong>Dimensioner:</strong> L: @surfboard.Length, B: @surfboard.Width, T: @surfboard.Thickness, V: @surfboard.Volume</p>
+                                    <p class="card-text"><strong>Type:</strong> @surfboard.Type</p>
+                                    <p class="card-text"><strong>Tilbehør:</strong> @(surfboard.Equipment ?? "Ingen")</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <!-- Besked når kurven er tom -->
+                <p>Kurven er tom.</p>
+            }
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Dato-picker sektion -->
+                    <form method="post" asp-controller="Checkouts" asp-action="CreateOrder">
+                        <label>Vælg en afhentningsdato!</label>
+                        <input type="date" asp-for="PickupDate" class="form-control" />
+
+                        <label>Vælg en returdato!</label>
+                        <input type="date" asp-for="ReturnDate" class="form-control" />
+                        <div class="text-danger" asp-validation-summary="All"></div>
+
+                        <input type="submit" class="btn btn-primary" value="Bekræft ordre" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

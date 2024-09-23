@@ -1,0 +1,38 @@
+﻿@model SurfsUpDbContext;
+
+@{
+    var surfboards = Model.Surfboards.ToList<Surfboard>();
+
+    <div class="container mt-5">
+        <div class="row">
+            @foreach (var surfboard in surfboards)
+            {
+                if (surfboard.Equipment == null)
+                {
+                    surfboard.Equipment = "Ingen";
+                }
+
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <img src="https://cdn.openart.ai/published/3qZkBGM8J9tqVqG8aHx7/g4V5D2mU_FsEB_256.webp" class="card-img-top" alt="Surfboard image" style="height: 200px; object-fit: cover;" />
+                        <div class="card-body">
+                            <h5 class="card-title">@surfboard.Name</h5>
+                            <p class="card-text"><strong>Pris:</strong> @surfboard.PriceOfPurchase kr.</p>
+                            <p class="card-text">
+                                <strong>Dimensioner:</strong> L: @surfboard.Length, B: @surfboard.Width, T: @surfboard.Thickness, V: @surfboard.Volume
+                            </p>
+                            <p class="card-text"><strong>Type:</strong> @surfboard.Type</p>
+                            <p class="card-text"><strong>Tilbehør:</strong> @surfboard.Equipment</p>
+                        </div>
+                        <div class="card-footer">
+                            <form asp-controller="Carts" asp-action="AddToCart" method="post" class="d-flex justify-content-center">
+                                <input type="hidden" name="id" value="@surfboard.SurfboardId" />
+                                <button type="submit" class="btn btn-primary">Tilføj til kurv</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

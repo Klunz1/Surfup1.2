@@ -23,7 +23,6 @@ namespace SurfsupEmil.Models
         public double PriceOfPurchase { get; set; }
         public string? Equipment { get; set; }
         public double? HourlyPrice { get; set; }
-        [NotMapped]
         public List<Order>? Orders { get; set; }
         public Surfboard() // IMPLICIT CONSTRUCTOR MADE EXPLICIT. I DON'T KNOW IF THIS IS STUPID
         {

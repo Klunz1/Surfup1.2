@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SurfsupEmil.Models;
 
@@ -11,9 +12,11 @@ using SurfsupEmil.Models;
 namespace SurfsupEmil.Migrations
 {
     [DbContext(typeof(SurfsUpDbContext))]
-    partial class SurfsUpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240923075609_MaybeLinkingTable")]
+    partial class MaybeLinkingTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace SurfsupEmil.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("OrderSurfboard", b =>
-                {
-                    b.Property<int>("OrdersOrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SurfboardsSurfboardId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrdersOrderId", "SurfboardsSurfboardId");
-
-                    b.HasIndex("SurfboardsSurfboardId");
-
-                    b.ToTable("OrderSurfboard");
-                });
 
             modelBuilder.Entity("SurfsupEmil.Models.Order", b =>
                 {
@@ -84,6 +72,9 @@ namespace SurfsupEmil.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
                     b.Property<double>("PriceOfPurchase")
                         .HasColumnType("float");
 
@@ -101,22 +92,21 @@ namespace SurfsupEmil.Migrations
 
                     b.HasKey("SurfboardId");
 
+                    b.HasIndex("OrderId");
+
                     b.ToTable("Surfboards");
                 });
 
-            modelBuilder.Entity("OrderSurfboard", b =>
+            modelBuilder.Entity("SurfsupEmil.Models.Surfboard", b =>
                 {
                     b.HasOne("SurfsupEmil.Models.Order", null)
-                        .WithMany()
-                        .HasForeignKey("OrdersOrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Surfboards")
+                        .HasForeignKey("OrderId");
+                });
 
-                    b.HasOne("SurfsupEmil.Models.Surfboard", null)
-                        .WithMany()
-                        .HasForeignKey("SurfboardsSurfboardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("SurfsupEmil.Models.Order", b =>
+                {
+                    b.Navigation("Surfboards");
                 });
 #pragma warning restore 612, 618
         }
