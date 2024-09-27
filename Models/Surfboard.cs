@@ -24,6 +24,7 @@ namespace SurfsupEmil.Models
         public string? Equipment { get; set; }
         public double? HourlyPrice { get; set; }
         public List<Order>? Orders { get; set; }
+        [Timestamp] public Byte[] RowVersion { get; set; }
         public Surfboard() // IMPLICIT CONSTRUCTOR MADE EXPLICIT. I DON'T KNOW IF THIS IS STUPID
         {
         }
