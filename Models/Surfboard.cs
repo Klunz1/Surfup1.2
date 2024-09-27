@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SurfsupEmil.Models.Validations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SurfsupEmil.Models
@@ -20,7 +21,10 @@ namespace SurfsupEmil.Models
         public double Thickness { get; set; }
         public double Volume { get; set; }
         [Required] public SurfboardType Type { get; set; }
+
+        [TotalPriceGreaterThanZero]
         public double PriceOfPurchase { get; set; }
+
         public string? Equipment { get; set; }
         public double? HourlyPrice { get; set; }
         public List<Order>? Orders { get; set; }
