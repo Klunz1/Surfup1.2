@@ -51,7 +51,26 @@ namespace SurfsupEmil.Controllers
             if (ModelState.IsValid)
             {
                 await _context.Orders.AddAsync(order);
-                await _context.SaveChangesAsync();
+
+
+                try    // Her håndteres concurrency. 
+                {
+                    foreach (Surfboard s in order.Surfboards)
+                    {
+                        _context.Entry(s).OriginalValues["RowVersion"] = s.RowVersion;
+                    }
+                    await _context.SaveChangesAsync();
+                    Console.WriteLine("Save successful!");
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    Console.WriteLine("Save was not successful because of concurrency issues.");
+                }
+                finally
+                {
+                    Console.WriteLine("Save was not successful, concurrency check was also not successful.");
+                }
+
                 CurrentOrder = new Order();
                 return RedirectToAction("Index", "Home");
             }
