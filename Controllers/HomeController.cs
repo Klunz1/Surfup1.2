@@ -14,48 +14,8 @@ namespace SurfsupEmil.Controllers
         {
             _logger = logger;
             _serviceProvider = serviceProvider;
-            CreateRole(_serviceProvider);
-            CreateAdmin(_serviceProvider);
-        }
 
-        private async Task CreateRole(IServiceProvider serviceProvider)
-        {
-            //initializing custom roles 
-            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            string[] roleNames = { "Admin" };
-            IdentityResult roleResult;
-
-            foreach (var roleName in roleNames)
-            {
-                var roleExist = await RoleManager.RoleExistsAsync(roleName);
-                if (!roleExist)
-                {
-                    //create the roles and seed them to the database: Question 1
-                    roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
-                }
-            }
-        }
-
-        private async void CreateAdmin(IServiceProvider serviceProvider)
-        {
-            var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-
-            var adminUser = new ApplicationUser
-            {
-                UserName = "admin",
-                Email = "admin@admin.com"
-            };
-
-            var user = await UserManager.FindByEmailAsync(adminUser.Email);
-
-            if (user == null)
-            {
-                var CreatePowerUser = await UserManager.CreateAsync(adminUser, "Password123!");
-                if (CreatePowerUser.Succeeded)
-                {
-                    await UserManager.AddToRoleAsync(adminUser, "Admin");
-                }
-            }
+            CreateAdminRoleAndUser(_serviceProvider).Wait();
         }
 
         public IActionResult Index()
@@ -72,6 +32,49 @@ namespace SurfsupEmil.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+
+        private async Task CreateAdminRoleAndUser(IServiceProvider serviceProvider)
+        {
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+            //initializing custom roles 
+            string[] roleNames = { "Admin" };
+
+            IdentityResult roleResult;
+            foreach (var roleName in roleNames)
+            {
+                var roleExist = await RoleManager.RoleExistsAsync(roleName);
+                if (!roleExist)
+                {
+                    //create the roles and seed them to the database: Question 1
+                    roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
+                }
+            }
+
+            //Initializing custom users.
+            var adminUser = new IdentityUser
+            {
+                UserName = "admin",
+                Email = "admin@admin.com",
+                EmailConfirmed = true,
+                NormalizedUserName = Guid.NewGuid().ToString(),
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+
+            var user = await UserManager.FindByEmailAsync(adminUser.Email);
+
+            if (user == null)
+            {
+                var CreatePowerUser = await UserManager.CreateAsync(adminUser, "Password123!");
+                if (CreatePowerUser.Succeeded)
+                {
+                    await UserManager.AddToRoleAsync(adminUser, "Admin");
+                }
+            }
         }
     }
 }

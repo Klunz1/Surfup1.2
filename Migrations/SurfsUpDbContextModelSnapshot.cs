@@ -34,7 +34,7 @@ namespace SurfsupEmil.Migrations
 
                     b.HasIndex("SurfboardsSurfboardId");
 
-                    b.ToTable("OrderSurfboard");
+                    b.ToTable("OrderSurfboard", (string)null);
                 });
 
             modelBuilder.Entity("SurfsupEmil.Models.Order", b =>
@@ -60,7 +60,7 @@ namespace SurfsupEmil.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("SurfsupEmil.Models.Surfboard", b =>
@@ -101,7 +101,7 @@ namespace SurfsupEmil.Migrations
 
                     b.HasKey("SurfboardId");
 
-                    b.ToTable("Surfboards");
+                    b.ToTable("Surfboards", (string)null);
                 });
 
             modelBuilder.Entity("OrderSurfboard", b =>
