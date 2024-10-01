@@ -30,7 +30,10 @@ namespace SurfsupEmil.Controllers
                 // Tilknyt eksisterende surfboards til ordren
                 foreach (var surfboard in existingSurfboards)
                 {
+                    _context.Entry(surfboard).OriginalValues["RowVersion"] = CurrentOrder.Surfboards.Where(x => x.SurfboardId == surfboard.SurfboardId).ToList()[0].RowVersion;
                     order.AddSurfboard(surfboard);
+
+                    _context.Entry(surfboard).State = EntityState.Modified;
                 }
             }
 
@@ -50,29 +53,27 @@ namespace SurfsupEmil.Controllers
 
             if (ModelState.IsValid)
             {
-                await _context.Orders.AddAsync(order);
 
 
                 try    // Her håndteres concurrency. 
                 {
-                    foreach (Surfboard s in order.Surfboards)
-                    {
-                        _context.Entry(s).OriginalValues["RowVersion"] = s.RowVersion;
-                    }
+                    await _context.Orders.AddAsync(order);
                     await _context.SaveChangesAsync();
                     Console.WriteLine("Save successful!");
+                    CurrentOrder = new Order();
+                    return RedirectToAction("Index", "Home");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     Console.WriteLine("Save was not successful because of concurrency issues.");
+                    ModelState.AddModelError("", "En anden bruger har ændret i det valgte surfboard. ");
+                    return View("Index", CurrentOrder);
                 }
                 finally
                 {
                     Console.WriteLine("Save was not successful, concurrency check was also not successful.");
                 }
 
-                CurrentOrder = new Order();
-                return RedirectToAction("Index", "Home");
             }
             return View("Index", CurrentOrder);
         }

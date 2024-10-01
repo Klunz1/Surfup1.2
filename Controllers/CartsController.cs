@@ -22,6 +22,8 @@ namespace SurfsupEmil.Controllers
             // Find det valgte surfboard baseret på ID
             var surfboard = await _context.Surfboards
                 .FirstOrDefaultAsync(m => m.SurfboardId == id);
+            if (surfboard is Surfboard && surfboard != null)
+                _context.Entry(surfboard).OriginalValues["RowVersion"] = surfboard.RowVersion;
 
 
 

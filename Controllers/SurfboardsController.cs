@@ -106,7 +106,7 @@ namespace SurfsupEmil.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SurfboardId,Name,Length,Width,Thickness,Volume,Type,PriceOfPurchase,Equipment,HourlyPrice")] Surfboard surfboard)
+        public async Task<IActionResult> Edit(int id, [Bind("SurfboardId,Name,Length,Width,Thickness,Volume,Type,PriceOfPurchase,Equipment,HourlyPrice, RowVersion")] Surfboard surfboard)
         {
             if (id != surfboard.SurfboardId)
             {
@@ -133,6 +133,16 @@ namespace SurfsupEmil.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                foreach (var error in errors)
+                {
+                    Console.WriteLine(error.ErrorMessage);
+                }
+            }
+
             return View(surfboard);
         }
 
