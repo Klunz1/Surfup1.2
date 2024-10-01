@@ -55,10 +55,6 @@ namespace SurfsupEmil.Controllers
 
                 try    // Her håndteres concurrency. 
                 {
-                    foreach (Surfboard s in order.Surfboards)
-                    {
-                        _context.Entry(s).OriginalValues["RowVersion"] = s.RowVersion;
-                    }
                     await _context.SaveChangesAsync();
                     Console.WriteLine("Save successful!");
                 }
