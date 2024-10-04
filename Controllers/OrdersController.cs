@@ -18,7 +18,7 @@ namespace SurfsupEmil.Controllers
             _context = context;
         }
 
-        // GET: Orders
+        // GET: Orders 1
         public async Task<IActionResult> Index()
         {
             return View(await _context.Orders.ToListAsync());
