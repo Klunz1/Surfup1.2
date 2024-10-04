@@ -25,8 +25,6 @@ namespace SurfsupEmil.Controllers
             if (surfboard is Surfboard && surfboard != null)
                 _context.Entry(surfboard).OriginalValues["RowVersion"] = surfboard.RowVersion;
 
-
-
             // Tilføj surfboard til ordren
             CheckoutsController.CurrentOrder.AddSurfboard(surfboard);
 

@@ -21,18 +21,15 @@ namespace SurfsupEmil.Models
         public double Thickness { get; set; }
         public double Volume { get; set; }
         [Required] public SurfboardType Type { get; set; }
-
         [TotalPriceGreaterThanZero]
         public double PriceOfPurchase { get; set; }
-
         public string? Equipment { get; set; }
-        public double? HourlyPrice { get; set; }
         public List<Order>? Orders { get; set; }
         [Timestamp] public Byte[] RowVersion { get; set; }
         public Surfboard() // IMPLICIT CONSTRUCTOR MADE EXPLICIT. I DON'T KNOW IF THIS IS STUPID
         {
         }
-        public Surfboard(int id, string name, double length, double width, double thickness, double volume, SurfboardType type, double priceOfPurchase, string equipment, double hourlyPrice)
+        public Surfboard(int id, string name, double length, double width, double thickness, double volume, SurfboardType type, double priceOfPurchase, string equipment)
         {
             SurfboardId = id;
             Name = name;
@@ -43,10 +40,9 @@ namespace SurfsupEmil.Models
             Type = type;
             PriceOfPurchase = priceOfPurchase;
             Equipment = equipment;
-            HourlyPrice = hourlyPrice;
         }
-        public Surfboard(string name, double length, double width, double thickness, double volume, SurfboardType type, double priceOfPurchase, string equipment, double hourlyPrice)
-            : this(0, name, length, width, thickness, volume, type, priceOfPurchase, equipment, hourlyPrice)
+        public Surfboard(string name, double length, double width, double thickness, double volume, SurfboardType type, double priceOfPurchase, string equipment)
+            : this(0, name, length, width, thickness, volume, type, priceOfPurchase, equipment)
         {
         }
     }

@@ -14,16 +14,16 @@ namespace SurfsupEmil.Controllers
         private readonly SurfsUpDbContext _context;
         private List<Surfboard> _surfboards = new List<Surfboard>
         {
-            new Surfboard { Name = "The Minilog", Length = 6d, Width = 21d, Thickness = 2.75d, Volume = 38.8d, Type = SurfboardType.Shortboard, PriceOfPurchase = 565d, Equipment = null, HourlyPrice = 60},
-            new Surfboard { Name = "The Wide Glider", Length = 7.1d, Width = 21.75d, Thickness = 2.75d, Volume = 44.16d, Type = SurfboardType.Funboard, PriceOfPurchase = 685d, Equipment = null, HourlyPrice = 65},
-            new Surfboard { Name = "The Golden Ratio", Length = 6.3d, Width = 21.85d, Thickness = 2.9d, Volume = 43.22d, Type = SurfboardType.Funboard, PriceOfPurchase = 695d, Equipment = null, HourlyPrice = 66},
-            new Surfboard { Name = "Mahi Mahi", Length = 5.4d, Width = 20.75d, Thickness = 2.3d, Volume = 29.39d, Type = SurfboardType.Fish, PriceOfPurchase = 645d, Equipment = null, HourlyPrice = 60},
-            new Surfboard { Name = "The Emerald Glider", Length = 9.2d, Width = 22.8d, Thickness = 2.8d, Volume = 65.4d, Type = SurfboardType.Longboard, PriceOfPurchase = 895d, Equipment = null, HourlyPrice = 90},
-            new Surfboard { Name = "The Bomb", Length = 5.5d, Width = 21d, Thickness = 2.5d, Volume = 33.7d, Type = SurfboardType.Shortboard, PriceOfPurchase = 645d, Equipment = null, HourlyPrice = 62},
-            new Surfboard { Name = "Walden Magic", Length = 9.6d, Width = 19.4d, Thickness = 3d, Volume = 80d, Type = SurfboardType.Longboard, PriceOfPurchase = 1025d, Equipment = null, HourlyPrice = 92},
-            new Surfboard { Name = "Naish One", Length = 12.6d, Width = 30d, Thickness = 6d, Volume = 301d, Type = SurfboardType.SUP, PriceOfPurchase = 854d, Equipment = "Paddle", HourlyPrice = 77},
-            new Surfboard { Name = "Six Tourer", Length = 11.6d, Width = 32d, Thickness = 6d, Volume = 270d, Type = SurfboardType.SUP, PriceOfPurchase = 611d, Equipment = "Fin, Paddle, Pump, Leash", HourlyPrice = 55},
-            new Surfboard { Name = "Naish Maliko", Length = 14d, Width = 25d, Thickness = 6d, Volume = 330d, Type = SurfboardType.SUP, PriceOfPurchase = 1304d, Equipment = "Fin, Paddle, Pump, Leash", HourlyPrice = 100},
+            new Surfboard { Name = "The Minilog", Length = 6d, Width = 21d, Thickness = 2.75d, Volume = 38.8d, Type = SurfboardType.Shortboard, PriceOfPurchase = 565d, Equipment = null},
+            new Surfboard { Name = "The Wide Glider", Length = 7.1d, Width = 21.75d, Thickness = 2.75d, Volume = 44.16d, Type = SurfboardType.Funboard, PriceOfPurchase = 685d, Equipment = null},
+            new Surfboard { Name = "The Golden Ratio", Length = 6.3d, Width = 21.85d, Thickness = 2.9d, Volume = 43.22d, Type = SurfboardType.Funboard, PriceOfPurchase = 695d, Equipment = null},
+            new Surfboard { Name = "Mahi Mahi", Length = 5.4d, Width = 20.75d, Thickness = 2.3d, Volume = 29.39d, Type = SurfboardType.Fish, PriceOfPurchase = 645d, Equipment = null},
+            new Surfboard { Name = "The Emerald Glider", Length = 9.2d, Width = 22.8d, Thickness = 2.8d, Volume = 65.4d, Type = SurfboardType.Longboard, PriceOfPurchase = 895d, Equipment = null},
+            new Surfboard { Name = "The Bomb", Length = 5.5d, Width = 21d, Thickness = 2.5d, Volume = 33.7d, Type = SurfboardType.Shortboard, PriceOfPurchase = 645d, Equipment = null},
+            new Surfboard { Name = "Walden Magic", Length = 9.6d, Width = 19.4d, Thickness = 3d, Volume = 80d, Type = SurfboardType.Longboard, PriceOfPurchase = 1025d, Equipment = null},
+            new Surfboard { Name = "Naish One", Length = 12.6d, Width = 30d, Thickness = 6d, Volume = 301d, Type = SurfboardType.SUP, PriceOfPurchase = 854d, Equipment = "Paddle"},
+            new Surfboard { Name = "Six Tourer", Length = 11.6d, Width = 32d, Thickness = 6d, Volume = 270d, Type = SurfboardType.SUP, PriceOfPurchase = 611d, Equipment = "Fin, Paddle, Pump, Leash"},
+            new Surfboard { Name = "Naish Maliko", Length = 14d, Width = 25d, Thickness = 6d, Volume = 330d, Type = SurfboardType.SUP, PriceOfPurchase = 1304d, Equipment = "Fin, Paddle, Pump, Leash"}
         };
 
         public SurfboardsController(SurfsUpDbContext context)

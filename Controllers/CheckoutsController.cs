@@ -53,8 +53,6 @@ namespace SurfsupEmil.Controllers
 
             if (ModelState.IsValid)
             {
-
-
                 try    // Her håndteres concurrency. 
                 {
                     await _context.Orders.AddAsync(order);
