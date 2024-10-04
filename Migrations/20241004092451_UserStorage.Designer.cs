@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SurfsupEmil.Models;
 
@@ -11,9 +12,11 @@ using SurfsupEmil.Models;
 namespace SurfsupEmil.Migrations
 {
     [DbContext(typeof(SurfsUpDbContext))]
-    partial class SurfsUpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241004092451_UserStorage")]
+    partial class UserStorage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
