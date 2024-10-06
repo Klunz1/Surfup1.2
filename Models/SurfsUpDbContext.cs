@@ -6,7 +6,6 @@ namespace SurfsupEmil.Models
     {
         public DbSet<Surfboard> Surfboards { get; set; } = null!;
         public DbSet<Order> Orders { get; set; } = null!;
-        public DbSet<User> Users { get; set; }
 
         public SurfsUpDbContext(DbContextOptions<SurfsUpDbContext> options) : base(options)
         {
