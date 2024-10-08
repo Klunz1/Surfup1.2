@@ -58,7 +58,7 @@ namespace SurfsupEmil.Controllers
             //Initializing custom users.
             var adminUser = new IdentityUser
             {
-                UserName = "admin",
+                UserName = "admin@admin.com",
                 Email = "admin@admin.com",
                 EmailConfirmed = true,
                 NormalizedUserName = Guid.NewGuid().ToString(),
