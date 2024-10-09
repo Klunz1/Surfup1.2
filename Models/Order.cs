@@ -10,7 +10,7 @@ namespace SurfsupEmil.Models
         public DateTime? PickupDate { get; set; } = null; // REMOVED REQUIRED FIELD BECAUSE IT WAS DIFFICULT TO ERROR HANDLE
         public DateTime? ReturnDate { get; set; } = null;
         public double TotalPrice { get; set; }
-        [Required] public User User { get; set; }
+        public string UserEmail { get; set; }
         public List<Surfboard> Surfboards { get; set; }
 
         public Order()

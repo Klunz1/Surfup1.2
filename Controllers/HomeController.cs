@@ -59,7 +59,7 @@ namespace SurfsupEmil.Controllers
             {
                 var adminUser = new IdentityUser
                 {
-                    UserName = "admin",
+                    UserName = "admin@admin.com",
                     Email = "admin@admin.com",
                     EmailConfirmed = true,
                     NormalizedUserName = "ADMIN",
@@ -79,31 +79,6 @@ namespace SurfsupEmil.Controllers
                 {
                     Console.WriteLine($"Error creating user: {string.Join(", ", createPowerUser.Errors.Select(e => e.Description))}");
                 }
-            }
-            if (user != null)
-            {
-                // Reset the password
-                var removePasswordResult = await UserManager.RemovePasswordAsync(user);
-                if (removePasswordResult.Succeeded)
-                {
-                    var addPasswordResult = await UserManager.AddPasswordAsync(user, "NewPassword123!");
-                    if (addPasswordResult.Succeeded)
-                    {
-                        Console.WriteLine("Password reset successfully!");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Error setting new password: {string.Join(", ", addPasswordResult.Errors.Select(e => e.Description))}");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine($"Error removing password: {string.Join(", ", removePasswordResult.Errors.Select(e => e.Description))}");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Admin user not found.");
             }
         }
     }
