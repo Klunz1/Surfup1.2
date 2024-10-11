@@ -35,7 +35,7 @@ namespace SurfsupEmil.Controllers
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }
-                return View(CurrentOrder);
+                return View(CurrentOrder); // Der er en bug her, hvis man ikke er logget ind...
             }
             if (!ValidateOrder(order))
             {
