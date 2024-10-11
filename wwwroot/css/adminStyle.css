@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html >
+<html lang="en" >
+<head >
+<meta charset="UTF-8" >
+<meta name="viewport" content="width=device-width, initial-scale=1.0" >
+<title > Administrator Side</title >
+<style >
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+form, button {
+    margin: 10px;
+}
+
+button {
+    width: 200px;
+    height: 50px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+form {
+    display: inline-block;
+}
+
+</style >
+</head >
+<body >
+<h1 > Administrator Side</h1 >
+
+<form asp-action="GoToOrders" method="get" >
+<button type="submit" > Ordrer</button >
+</form >
+
+<button type="submit" > Kunder</button >
+
+<form asp-action="GoToSurfboards" method="get" >
+<button type="submit" > Surfboards</button >
+</form >
+</body >
+</html >

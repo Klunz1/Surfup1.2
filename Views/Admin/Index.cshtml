@@ -1,4 +1,8 @@
-﻿<body>
+﻿<head>
+    <!-- Link to external CSS file in wwwroot -->
+    <link rel="stylesheet" href="~/css/adminStyle.css" />
+</head>
+<body>
     <h1>Administrator side</h1>
 
 
@@ -11,4 +15,12 @@
     <form asp-action="GoToSurfboards" method="get">
         <button type="submit">Surfboards</button>
     </form>
+    <div class="video-container">
+        <iframe width="560" height="315"
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=WHoXVc3SQsQvK04L"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+    </div>
 </body>
