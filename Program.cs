@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SurfsupEmil.Data;
+using SurfsupEmil.Middleware;
 using SurfsupEmil.Models;
 
 namespace SurfsupEmil
@@ -43,6 +44,10 @@ namespace SurfsupEmil
             }
 
             app.UseHttpsRedirection();
+
+            // Middleware to count requests
+            app.UseMiddleware<RequestCounterMiddleware>();
+
             app.UseStaticFiles();
 
             app.UseRouting();
